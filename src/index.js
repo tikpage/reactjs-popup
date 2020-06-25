@@ -345,7 +345,7 @@ export default class Popup extends React.PureComponent {
       overlay && (
         <div
           key="O"
-          className={`popup-overlay ${
+          className={`popup-overlay tik-overlay ${
             className !== '' ? `${className}-overlay` : ''
           }`}
           style={Object.assign({}, ovStyle, overlayStyle)}
