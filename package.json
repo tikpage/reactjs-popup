@@ -1,6 +1,6 @@
 {
   "name": "@tikpage/reactjs-popup",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "React Popup Component - Modals,Tooltips and Menus —  All in one",
   "main": "lib/@tikpage/reactjs-popup.cjs.js",
   "module": "lib/@tikpage/reactjs-popup.es.js",
