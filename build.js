@@ -6,7 +6,7 @@ const pkg = require('./package.json');
 const options = {
   input: './src/index.js',
   outDir: 'lib',
-  name: 'reactjs-popup',
+  name: '@tikpage/reactjs-popup',
   format: ['es', 'cjs', 'umd', 'umd-min'],
   banner: true,
   target: 'browser',

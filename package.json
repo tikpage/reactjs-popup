@@ -1,12 +1,12 @@
 {
   "name": "@tikpage/reactjs-popup",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "React Popup Component - Modals,Tooltips and Menus —  All in one",
-  "main": "reactjs-popup.cjs.js",
-  "module": "reactjs-popup.es.js",
-  "jsnext:main": "reactjs-popup.es.js",
-  "unpkg": "reactjs-popup.js",
-  "jsdelivr": "reactjs-popup.js",
+  "main": "lib/@tikpage/reactjs-popup.cjs.js",
+  "module": "lib/@tikpage/reactjs-popup.es.js",
+  "jsnext:main": "lib/@tikpage/reactjs-popup.es.js",
+  "unpkg": "lib/@tikpage/reactjs-popup.js",
+  "jsdelivr": "lib/@tikpage/reactjs-popup.js",
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
