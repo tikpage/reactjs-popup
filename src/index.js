@@ -1,6 +1,7 @@
 import React from 'react';
 import calculatePosition from './Utils';
 import styles from './index.css.js';
+import BodyEnd from './BodyEnd';
 
 const POSITION_TYPES = [
   'top left',
@@ -21,8 +22,8 @@ const POSITION_TYPES = [
 export default class Popup extends React.PureComponent {
   static defaultProps = {
     trigger: null,
-    onOpen: () => {},
-    onClose: () => {},
+    onOpen: () => { },
+    onClose: () => { },
     defaultOpen: false,
     open: false,
     disabled: false,
@@ -52,7 +53,7 @@ export default class Popup extends React.PureComponent {
     this.setArrowRef = r => (this.ArrowEl = r);
     this.setHelperRef = r => (this.HelperEl = r);
     this.timeOut = 0;
-    const {open, modal, defaultOpen, trigger} = props;
+    const { open, modal, defaultOpen, trigger } = props;
     this.state = {
       isOpen: open || defaultOpen,
       modal: modal ? true : !trigger,
@@ -61,7 +62,7 @@ export default class Popup extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {closeOnEscape, defaultOpen, repositionOnResize} = this.props;
+    const { closeOnEscape, defaultOpen, repositionOnResize } = this.props;
     if (defaultOpen) {
       this.setPosition();
       this.lockScroll();
@@ -77,8 +78,8 @@ export default class Popup extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {open, disabled} = this.props;
-    const {isOpen} = this.state;
+    const { open, disabled } = this.props;
+    const { isOpen } = this.state;
     if (prevProps.open !== open) {
       if (open) this.openPopup();
       else this.closePopup(undefined, true);
@@ -92,7 +93,7 @@ export default class Popup extends React.PureComponent {
     // kill any function to execute if the component is unmounted
     clearTimeout(this.timeOut);
 
-    const {closeOnEscape, repositionOnResize} = this.props;
+    const { closeOnEscape, repositionOnResize } = this.props;
     // remove events listeners
     if (closeOnEscape) {
       /* eslint-disable-next-line no-undef */
@@ -114,16 +115,16 @@ export default class Popup extends React.PureComponent {
   };
 
   lockScroll = () => {
-    const {lockScroll} = this.props;
-    const {modal} = this.state;
+    const { lockScroll } = this.props;
+    const { modal } = this.state;
     if (modal && lockScroll)
       /* eslint-disable-next-line no-undef */
       document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   };
 
   resetScroll = () => {
-    const {lockScroll} = this.props;
-    const {modal} = this.state;
+    const { lockScroll } = this.props;
+    const { modal } = this.state;
     if (modal && lockScroll)
       /* eslint-disable-next-line no-undef */
       document.getElementsByTagName('body')[0].style.overflow = 'auto';
@@ -137,40 +138,40 @@ export default class Popup extends React.PureComponent {
   };
 
   openPopup = e => {
-    const {disabled, onOpen} = this.props;
-    const {isOpen} = this.state;
+    const { disabled, onOpen } = this.props;
+    const { isOpen } = this.state;
     if (isOpen || disabled) return;
     onOpen(e);
-    this.setState({isOpen: true}, () => {
+    this.setState({ isOpen: true }, () => {
       this.setPosition();
       this.lockScroll();
     });
   };
 
   closePopup = e => {
-    const {onClose} = this.props;
-    const {isOpen} = this.state;
+    const { onClose } = this.props;
+    const { isOpen } = this.state;
     if (!isOpen) return;
     onClose(e);
-    this.setState({isOpen: false}, () => {
+    this.setState({ isOpen: false }, () => {
       this.resetScroll();
     });
   };
 
   onMouseEnter = () => {
     clearTimeout(this.timeOut);
-    const {mouseEnterDelay} = this.props;
+    const { mouseEnterDelay } = this.props;
     this.timeOut = setTimeout(() => this.openPopup(), mouseEnterDelay);
   };
 
   onMouseLeave = () => {
     clearTimeout(this.timeOut);
-    const {mouseLeaveDelay} = this.props;
+    const { mouseLeaveDelay } = this.props;
     this.timeOut = setTimeout(() => this.closePopup(), mouseLeaveDelay);
   };
 
   getTooltipBoundary = () => {
-    const {keepTooltipInside} = this.props;
+    const { keepTooltipInside } = this.props;
     let boundingBox = {
       top: 0,
       left: 0,
@@ -194,7 +195,7 @@ export default class Popup extends React.PureComponent {
   };
 
   setPosition = () => {
-    const {modal, isOpen} = this.state;
+    const { modal, isOpen } = this.state;
     if (modal || !isOpen) return;
     const {
       arrow,
@@ -253,8 +254,8 @@ export default class Popup extends React.PureComponent {
   };
 
   addWarperAction = () => {
-    const {contentStyle, className, on} = this.props;
-    const {modal} = this.state;
+    const { contentStyle, className, on } = this.props;
+    const { modal } = this.state;
     const popupContentStyle = modal
       ? styles.popupContent.modal
       : styles.popupContent.tooltip;
@@ -262,7 +263,7 @@ export default class Popup extends React.PureComponent {
     const childrenElementProps = {
       className: `popup-content ${
         className !== '' ? `${className}-content` : ''
-      }`,
+        }`,
       style: Object.assign({}, popupContentStyle, contentStyle),
       ref: this.setContentRef,
       onClick: e => {
@@ -277,9 +278,9 @@ export default class Popup extends React.PureComponent {
   };
 
   renderTrigger = () => {
-    const triggerProps = {key: 'T' , ref: this.setTriggerRef};
-    const {on, trigger} = this.props;
-    const {isOpen} = this.state;
+    const triggerProps = { key: 'T', ref: this.setTriggerRef };
+    const { on, trigger } = this.props;
+    const { isOpen } = this.state;
     const onAsArray = Array.isArray(on) ? on : [on];
     for (let i = 0, len = onAsArray.length; i < len; i++) {
       switch (onAsArray[i]) {
@@ -305,8 +306,8 @@ export default class Popup extends React.PureComponent {
   };
 
   renderContent = () => {
-    const {arrow, arrowStyle, children} = this.props;
-    const {modal, isOpen} = this.state;
+    const { arrow, arrowStyle, children } = this.props;
+    const { modal, isOpen } = this.state;
     return (
       <div {...this.addWarperAction()} key="C">
         {arrow && !modal && (
@@ -330,28 +331,21 @@ export default class Popup extends React.PureComponent {
       on,
       trigger,
     } = this.props;
-    const {modal, isOpen} = this.state;
+    const { modal, isOpen } = this.state;
     const overlay = isOpen && !(on.indexOf('hover') >= 0);
     const ovStyle = modal ? styles.overlay.modal : styles.overlay.tooltip;
     return [
-       this.renderTrigger(),
-      isOpen && (
-        <div
-          key="H"
-          style={{position: 'absolute', top: '0px', left: '0px'}}
-          ref={this.setHelperRef}
-        />
-      ),
+      this.renderTrigger(),
       overlay && (
-        <div
+        <BodyEnd
           key="O"
           className={`popup-overlay tik-overlay tik-popup-overlay ${
             className !== '' ? `${className}-overlay` : ''
-          }`}
+            }`}
           style={Object.assign({}, ovStyle, overlayStyle)}
           onClick={closeOnDocumentClick ? this.closePopup : undefined}>
           {modal && this.renderContent()}
-        </div>
+        </BodyEnd>
       ),
       isOpen && !modal && this.renderContent(),
     ];
